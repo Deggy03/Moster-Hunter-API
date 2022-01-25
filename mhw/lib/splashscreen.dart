@@ -1,3 +1,4 @@
+//Degano Riccardo 24/01/2022
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:mhw/main.dart';
@@ -20,8 +21,10 @@ class _SplashScreenState extends State<Splash> {
         Duration(seconds: 3),
         () => Navigator.of(context).pushReplacement(MaterialPageRoute(
             // ignore: prefer_const_constructors
-            builder: (BuildContext context) => MyHomePage(title: 'Moster Hunter',))));
+            builder: (BuildContext context) => MyHomePage(title: 'Moster Hunter',))));           
   }
+
+
 
   @override
   Widget build(BuildContext context) {

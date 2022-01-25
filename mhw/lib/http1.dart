@@ -1,40 +1,39 @@
-//Degano Riccardo 24/01/2022
 
 import 'dart:convert';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart' as http1;
 
-import 'data.dart';
+import 'nome.dart';
 
 
-
-class Http extends StatefulWidget {
+  
+class Http1 extends StatefulWidget {
   final int id;
 
 
-  const Http({Key? key, required this.id}) : super(key: key);
+  const Http1({Key? key, required this.id}) : super(key: key);
 
   @override
   // ignore: no_logic_in_create_state
-  _HttpState createState() => _HttpState(id+1);
+  _HttpState1 createState() => _HttpState1(id+1);
 }
 
-class _HttpState extends State<Http> {
+class _HttpState1 extends State<Http1> {
   final int arma;
  
 
-  _HttpState(this.arma);
+  _HttpState1(this.arma);
 
-  Future<Data> fetchData() async {
-    http.Response response = await http.get(Uri.parse(
+  Future<Data1> fetchData() async {
+    http1.Response response = await http1.get(Uri.parse(
         'https://mhw-db.com/weapons/'+arma.toString()));
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.
-      return Data.fromJson(jsonDecode(response.body));
+      return Data1.fromJson(jsonDecode(response.body));
     } else {
       // If the server did not return a 200 OK response,
       // then throw an exception.
@@ -42,7 +41,7 @@ class _HttpState extends State<Http> {
     }
   }
 
-  late Future<Data> futureData;
+  late Future<Data1> futureData;
 
   @override
   void initState() {
@@ -54,26 +53,12 @@ class _HttpState extends State<Http> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<Data>(
+    return FutureBuilder<Data1>(
         future: futureData,
         builder: (context, snapshot) {
-          
-     
-        
-         String _stampa = (
-
-              '\nName: ' +
-              snapshot.data!.name +
-              '\nTipo: ' +
-              snapshot.data!.type +
-              '\nRarità: ' +
-             snapshot.data!.rarity.toString() +       
-              '\nTipo di Danno: ' +
-              snapshot.data!.damageType 
               
-          );
           if (snapshot.hasData) {
-            return   Text(_stampa);
+            return   Text(snapshot.data!.name);
           } else if (snapshot.hasError) {
             return Text('${snapshot.error}');
           }
